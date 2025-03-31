@@ -1,10 +1,80 @@
 
-Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (9.35s)
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (59.65s)
 Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
-        Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
-0  TorchScript       ✅       10.5               0.6082                  116.68  8.57
+    Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0  PyTorch       ✅        5.4               0.5101                  398.74  2.51
 
-Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (15.56s)
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (73.97s)
 Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
         Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
-0  TorchScript       ✅       10.5               0.6082                  168.97  5.92
+0  TorchScript       ✅       10.5               0.5077                  508.55  1.97
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (41.41s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0   ONNX       ✅       10.2               0.5077                  266.95  3.75
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (26.77s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+     Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0  OpenVINO       ✅       10.4               0.5058                  117.78  8.49
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+     Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorRT       ❌        0.0                   -                      -   -
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+   Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  CoreML       ❌        0.0                   -                      -   -
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (104.36s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+                  Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0  TensorFlow SavedModel       ✅       26.5               0.5077                  373.39  2.68
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (102.32s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+                Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0  TensorFlow GraphDef       ✅       10.3               0.5077                  371.46  2.69
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (94.80s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+            Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0  TensorFlow Lite       ✅       10.3               0.5077                  353.57  2.83
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (0.01s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+                Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorFlow Edge TPU       ❌        0.0                   -                      -   -
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+          Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorFlow.js       ❌        0.0                   -                      -   -
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (90.50s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+         Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0  PaddlePaddle       ✅       20.4               0.5077                  598.31  1.67
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (25.28s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0    MNN       ✅       10.1               0.5034                  136.77  7.31
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (34.69s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB)  metrics/mAP50-95(B)  Inference time (ms/im)   FPS
+0   NCNN       ✅       10.2               0.5057                  187.25  5.34
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0    IMX       ❌        0.0                   -                      -   -
+
+Benchmarks complete for yolo11n.pt on coco128.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0   RKNN       ❌        0.0                   -                      -   -

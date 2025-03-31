@@ -1,0 +1,11 @@
+Format,Inference Time (ms)
+PyTorch,398.74
+TorchScript,508.55
+ONNX,266.95
+OpenVINO,117.78
+SavedModel,373.39
+GraphDef,371.46
+Lite,353.57
+PaddlePaddle,598.31
+MNN,136.77
+NCNN,187.25

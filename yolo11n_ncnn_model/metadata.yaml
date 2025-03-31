@@ -1,7 +1,7 @@
 description: Ultralytics YOLO11n model trained on /usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml
 author: Ultralytics
-date: '2025-03-23T22:17:06.678461'
-version: 8.3.70
+date: '2025-03-31T01:35:44.880299'
+version: 8.3.99
 license: AGPL-3.0 License (https://ultralytics.com/license)
 docs: https://docs.ultralytics.com
 stride: 32

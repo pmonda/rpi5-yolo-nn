@@ -1,0 +1,322 @@
+-
+torchscript
+onnx
+openvino
+engine
+coreml
+saved_model
+pb
+tflite
+edgetpu
+tfjs
+paddle
+mnn
+ncnn
+imx
+rknn
+ERROR ❌️ Benchmark failure for PyTorch: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (1.27s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+    Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  PyTorch       ❎        5.4                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mTorchScript:[0m starting export with torch 2.6.0+cpu...
+[34m[1mTorchScript:[0m export success ✅ 4.9s, saved as 'yolo11n.torchscript' (10.5 MB)
+
+Export complete (6.2s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n.torchscript imgsz=640  
+Validate:        yolo val task=detect model=yolo11n.torchscript imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n.torchscript for TorchScript inference...
+Loading yolo11n.torchscript for TorchScript inference...
+ERROR ❌️ Benchmark failure for TorchScript: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (8.28s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+        Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TorchScript       ❎       10.5                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mONNX:[0m starting export with onnx 1.16.1 opset 19...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.49...
+[34m[1mONNX:[0m export success ✅ 2.7s, saved as 'yolo11n.onnx' (10.2 MB)
+
+Export complete (4.1s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n.onnx imgsz=640  
+Validate:        yolo val task=detect model=yolo11n.onnx imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n.onnx for ONNX Runtime inference...
+Using ONNX Runtime CPUExecutionProvider
+Loading yolo11n.onnx for ONNX Runtime inference...
+Using ONNX Runtime CPUExecutionProvider
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for ONNX: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (4.48s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0   ONNX       ❎       10.2                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mOpenVINO:[0m starting export with openvino 2024.6.0-17404-4c0f47d2335-releases/2024/6...
+[34m[1mOpenVINO:[0m export success ✅ 6.5s, saved as 'yolo11n_openvino_model/' (10.4 MB)
+
+Export complete (7.6s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n_openvino_model imgsz=640  
+Validate:        yolo val task=detect model=yolo11n_openvino_model imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n_openvino_model for OpenVINO inference...
+Using OpenVINO LATENCY mode for batch=1 inference...
+Loading yolo11n_openvino_model for OpenVINO inference...
+Using OpenVINO LATENCY mode for batch=1 inference...
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for OpenVINO: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (8.77s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+     Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  OpenVINO       ❎       10.4                   -                      -   -
+
+ERROR ❌️ Benchmark failure for TensorRT: inference not supported on CPU
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+     Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorRT       ❌        0.0                   -                      -   -
+
+ERROR ❌️ Benchmark failure for CoreML: CoreML and TF.js export only supported on macOS and non-aarch64 Linux
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+   Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  CoreML       ❌        0.0                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mTensorFlow SavedModel:[0m starting export with tensorflow 2.19.0...
+
+[34m[1mONNX:[0m starting export with onnx 1.16.1 opset 19...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.49...
+[34m[1mONNX:[0m export success ✅ 2.2s, saved as 'yolo11n.onnx' (10.2 MB)
+[34m[1mTensorFlow SavedModel:[0m starting TFLite export with onnx2tf 1.27.1...
+[34m[1mTensorFlow SavedModel:[0m export success ✅ 45.4s, saved as 'yolo11n_saved_model' (26.5 MB)
+
+Export complete (46.5s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n_saved_model imgsz=640  
+Validate:        yolo val task=detect model=yolo11n_saved_model imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n_saved_model for TensorFlow SavedModel inference...
+Loading yolo11n_saved_model for TensorFlow SavedModel inference...
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for TensorFlow SavedModel: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (50.14s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+                  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorFlow SavedModel       ❎       26.5                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mTensorFlow SavedModel:[0m starting export with tensorflow 2.19.0...
+
+[34m[1mONNX:[0m starting export with onnx 1.16.1 opset 19...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.49...
+[34m[1mONNX:[0m export success ✅ 2.2s, saved as 'yolo11n.onnx' (10.2 MB)
+[34m[1mTensorFlow SavedModel:[0m starting TFLite export with onnx2tf 1.27.1...
+[34m[1mTensorFlow SavedModel:[0m export success ✅ 42.3s, saved as 'yolo11n_saved_model' (26.5 MB)
+
+[34m[1mTensorFlow GraphDef:[0m starting export with tensorflow 2.19.0...
+[34m[1mTensorFlow GraphDef:[0m export success ✅ 2.1s, saved as 'yolo11n.pb' (10.3 MB)
+
+Export complete (45.5s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n.pb imgsz=640  
+Validate:        yolo val task=detect model=yolo11n.pb imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n.pb for TensorFlow GraphDef inference...
+Loading yolo11n.pb for TensorFlow GraphDef inference...
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for TensorFlow GraphDef: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (48.21s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+                Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorFlow GraphDef       ❎       10.3                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mTensorFlow SavedModel:[0m starting export with tensorflow 2.19.0...
+
+[34m[1mONNX:[0m starting export with onnx 1.16.1 opset 19...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.49...
+[34m[1mONNX:[0m export success ✅ 2.4s, saved as 'yolo11n.onnx' (10.3 MB)
+[34m[1mTensorFlow SavedModel:[0m starting TFLite export with onnx2tf 1.27.1...
+[34m[1mTensorFlow SavedModel:[0m export success ✅ 42.1s, saved as 'yolo11n_saved_model' (26.9 MB)
+
+[34m[1mTensorFlow Lite:[0m starting export with tensorflow 2.19.0...
+[34m[1mTensorFlow Lite:[0m export success ✅ 0.0s, saved as 'yolo11n_saved_model/yolo11n_float32.tflite' (10.3 MB)
+
+Export complete (43.2s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n_saved_model/yolo11n_float32.tflite imgsz=640  
+Validate:        yolo val task=detect model=yolo11n_saved_model/yolo11n_float32.tflite imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n_saved_model/yolo11n_float32.tflite for TensorFlow Lite inference...
+Loading yolo11n_saved_model/yolo11n_float32.tflite for TensorFlow Lite inference...
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for TensorFlow Lite: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (43.72s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+            Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorFlow Lite       ❎       10.3                   -                      -   -
+
+ERROR ❌️ Benchmark failure for TensorFlow Edge TPU: Edge TPU export only supported on non-aarch64 Linux
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+                Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorFlow Edge TPU       ❌        0.0                   -                      -   -
+
+ERROR ❌️ Benchmark failure for TensorFlow.js: CoreML and TF.js export only supported on macOS and non-aarch64 Linux
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+          Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  TensorFlow.js       ❌        0.0                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mPaddlePaddle:[0m starting export with X2Paddle 1.6.0...
+Exporting inference model from python code ('/home/prane/Documents/rpi5-yolo-nn/yolo11n_paddle_model/x2paddle_code.py')... 
+
+[34m[1mPaddlePaddle:[0m export success ✅ 7.6s, saved as 'yolo11n_paddle_model/' (20.4 MB)
+
+Export complete (8.8s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n_paddle_model imgsz=640  
+Validate:        yolo val task=detect model=yolo11n_paddle_model imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n_paddle_model for PaddlePaddle inference...
+Loading yolo11n_paddle_model for PaddlePaddle inference...
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for PaddlePaddle: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (10.66s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+         Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0  PaddlePaddle       ❎       20.4                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mONNX:[0m starting export with onnx 1.16.1 opset 19...
+[34m[1mONNX:[0m slimming with onnxslim 0.1.49...
+[34m[1mONNX:[0m export success ✅ 2.7s, saved as 'yolo11n.onnx' (10.2 MB)
+
+[34m[1mMNN:[0m starting export with MNN 3.1.1...
+Can't open file:/sys/devices/system/cpu/cpufreq/ondemand/affected_cpus
+CPU Group: [ 0  1  2  3 ], 1500000 - 2400000
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0
+Can't open file:/sys/devices/system/cpu/cpufreq/ondemand/affected_cpus
+CPU Group: [ 0  1  2  3 ], 1500000 - 2400000
+The device supports: i8sdot:1, fp16:1, i8mm: 0, sve2: 0, sme2: 0
+Start to Convert Other Model Format To MNN Model..., target version: 3.1
+[00:01:23] :46: ONNX Model ir version: 9
+[00:01:23] :47: ONNX Model opset version: 19
+[00:01:23] :146: Check it out ==> /model.11/Resize_output_0 has empty input, the index is 1
+[00:01:23] :146: Check it out ==> /model.14/Resize_output_0 has empty input, the index is 1
+Start to Optimize the MNN Net...
+inputTensors : [ images, ]
+outputTensors: [ output0, ]
+Converted Success!
+[34m[1mMNN:[0m export success ✅ 4.3s, saved as 'yolo11n.mnn' (10.1 MB)
+
+Export complete (5.6s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n.mnn imgsz=640  
+Validate:        yolo val task=detect model=yolo11n.mnn imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n.mnn for MNN inference...
+Loading yolo11n.mnn for MNN inference...
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for MNN: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (5.94s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0    MNN       ❎       10.1                   -                      -   -
+
+
+[34m[1mPyTorch:[0m starting from 'yolo11n.pt' with input shape (1, 3, 640, 640) BCHW and output shape(s) (1, 84, 8400) (5.4 MB)
+
+[34m[1mTorchScript:[0m starting export with torch 2.6.0+cpu...
+[34m[1mTorchScript:[0m export success ✅ 4.8s, saved as 'yolo11n.torchscript' (10.5 MB)
+
+[34m[1mNCNN:[0m starting export with NCNN 1.0.20241226...
+[34m[1mNCNN:[0m running '/home/prane/Documents/rpi5-yolo-nn/venv/lib/python3.11/site-packages/ultralytics/pnnx yolo11n.torchscript ncnnparam=yolo11n_ncnn_model/model.ncnn.param ncnnbin=yolo11n_ncnn_model/model.ncnn.bin ncnnpy=yolo11n_ncnn_model/model_ncnn.py pnnxparam=yolo11n_ncnn_model/model.pnnx.param pnnxbin=yolo11n_ncnn_model/model.pnnx.bin pnnxpy=yolo11n_ncnn_model/model_pnnx.py pnnxonnx=yolo11n_ncnn_model/model.pnnx.onnx fp16=0 device=cpu inputshape="[1, 3, 640, 640]"'
+[34m[1mNCNN:[0m export success ✅ 2.6s, saved as 'yolo11n_ncnn_model' (10.2 MB)
+
+Export complete (8.6s)
+Results saved to [1m/home/prane/Documents/rpi5-yolo-nn[0m
+Predict:         yolo predict task=detect model=yolo11n_ncnn_model imgsz=640  
+Validate:        yolo val task=detect model=yolo11n_ncnn_model imgsz=640 data=/usr/src/ultralytics/ultralytics/cfg/datasets/coco.yaml  
+Visualize:       https://netron.app
+Loading yolo11n_ncnn_model for NCNN inference...
+Loading yolo11n_ncnn_model for NCNN inference...
+Setting batch=1 input of shape (1, 3, 640, 640)
+ERROR ❌️ Benchmark failure for NCNN: No module named 'numpy._core'
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (8.98s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0   NCNN       ❎       10.2                   -                      -   -
+
+ERROR ❌️ Benchmark failure for IMX: IMX only supported for YOLOv8
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0    IMX       ❌        0.0                   -                      -   -
+
+ERROR ❌️ Benchmark failure for RKNN: inference not supported on CPU
+Setup complete ✅ (4 CPUs, 15.8 GB RAM, 16.4/116.9 GB disk)
+
+Benchmarks complete for yolo11n.pt on coco8.yaml at imgsz=640 (0.00s)
+Benchmarks legend:  - ✅ Success  - ❎ Export passed but validation failed  - ❌️ Export failed
+  Format Status❔  Size (MB) metrics/mAP50-95(B) Inference time (ms/im) FPS
+0   RKNN       ❌        0.0                   -                      -   -
+
+MNN use low precision
+MNN use low precision

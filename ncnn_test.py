@@ -4,12 +4,16 @@ import numpy as np
 import torch
 import time
 
+import ultralytics.engine.exporter as exporter
+
 model = YOLO("yolo11n.pt")
 
+all_formats = exporter.export_formats()["Argument"]
+for format in all_formats:
+    print(format)
 
-
-for model_format in ["torchscript", "onnx"]:
-    model.benchmark(data="coco8.yaml", imgsz=640, format=model_format)
+for model_format in list(all_formats):
+    model.benchmark(data="coco128.yaml", imgsz=640, format=model_format)
     
 
 
