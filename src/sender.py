@@ -13,12 +13,19 @@ cnt = 0
 while True:
     message, address = RPIsocket.recvfrom(bufferSize)
     message = message.decode('utf-8')
-    print(message)
-    print('Client Address ', address[0])
+    print(f"Port {address[1]}@{address[0]} says: {message}")
+
     if message == 'INC':
         cnt += 1
     if message == 'DEC':
         cnt -= 1
-    msg = str(cnt)
-    msg = msg.encode('utf-8')
+    
+    msg_orig = input("Send Message: ")
+    msg = msg_orig.encode('utf-8')
     RPIsocket.sendto(msg, address)
+    if "bye" in msg_orig.lower():
+        print("Client says bye, exiting...")
+        RPIsocket.close()
+        break
+    
+    
