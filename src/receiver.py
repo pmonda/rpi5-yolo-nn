@@ -12,6 +12,8 @@ while True:
     UDPClient.sendto(cmd, serverAddress)
     data, address = UDPClient.recvfrom(bufferSize)
     data = data.decode('utf-8')
-    print("Data from server ",data)
-    print("Server IP Address ", address[0])
-    print('Server Port ', address[1])
+    print(f"Port {address[1]}@{address[0]} says: {data}")
+    if "bye" in data.lower():
+        print("Server says bye, closing client")
+        UDPClient.close()
+        break
