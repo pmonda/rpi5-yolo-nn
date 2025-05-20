@@ -1,29 +1,29 @@
+
 import socket
 from PIL import Image
 import time
 
-bufferSize = 1024
-serverIP = "0.0.0.0"  # Listen on all interfaces
-serverPort = 2222
+listen_ip = '0.0.0.0'  # Listen on all interfaces
+listen_port = 5005
+buffer_size = 1024
+end_marker = b'__end__'
 
-RPIsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-RPIsocket.bind((serverIP, serverPort))
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((listen_ip, listen_port))
 
-print('Receiver is Listening ...')
+with open("received_image.png", "wb") as f:
+    print("Listening for image data...")
+    while True:
+        data, addr = sock.recvfrom(buffer_size)
+        if data == end_marker:
+            print("End of image received.")
+            break
+        f.write(data)
 
-while True:
-    with open("received_image.png", "wb") as f:
-        while True:
-            data, addr = RPIsocket.recvfrom(bufferSize)
-            if data == b"__end__":
-                break
-            f.write(data)
+time.sleep(0.1)  # Give system time to flush I/O
 
-    try:
-        img = Image.open("received_image.png")
-        img.show()
-        print("Image received and displayed.")
-    except Exception as e:
-        print(f"Error opening image: {e}")
-
-    time.sleep(5)  # Optional wait between receptions
+try:
+    img = Image.open("received_image.png")
+    img.show()
+except Exception as e:
+    print(f"Failed to open image: {e}")

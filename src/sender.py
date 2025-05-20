@@ -1,20 +1,22 @@
+
 import socket
-import time
 
-serverAddress = ('<PC_IP_ADDRESS>', 2222)  # Replace with your PC's IP
-bufferSize = 1024
+# Replace with your PC's IP address
+receiver_ip = '192.168.1.100'
+receiver_port = 5005
+buffer_size = 1024
+end_marker = b'__end__'
 
-UDPClient = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+address = (receiver_ip, receiver_port)
 
-while True:
-    with open("pmh2mmc4.png", "rb") as f:
-        while True:
-            data = f.read(bufferSize)
-            if not data:
-                break
-            UDPClient.sendto(data, serverAddress)
+with open("image.png", "rb") as f:
+    while True:
+        chunk = f.read(buffer_size)
+        if not chunk:
+            break
+        sock.sendto(chunk, address)
 
-    # Send end-of-image marker
-    UDPClient.sendto(b"__end__", serverAddress)
-    print("Image sent. Waiting before next transmission...")
-    time.sleep(5)  # Delay between sends
+# Send end-of-image marker
+sock.sendto(end_marker, address)
+print("Image sent.")
