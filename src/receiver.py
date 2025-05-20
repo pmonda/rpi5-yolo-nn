@@ -1,29 +1,32 @@
-
 import socket
 from PIL import Image
 import time
 
-listen_ip = '0.0.0.0'  # Listen on all interfaces
-listen_port = 5005
-buffer_size = 1024
-end_marker = b'__end__'
+HOST = '0.0.0.0'  # Listen on all interfaces
+PORT = 5001
+BUFFER_SIZE = 4096
+OUTPUT_FILE = "received_image.png"
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-sock.bind((listen_ip, listen_port))
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
+    server_socket.bind((HOST, PORT))
+    server_socket.listen(1)
+    print(f"Server listening on {HOST}:{PORT}")
 
-with open("received_image.png", "wb") as f:
-    print("Listening for image data...")
-    while True:
-        data, addr = sock.recvfrom(buffer_size)
-        if data == end_marker:
-            print("End of image received.")
-            break
-        f.write(data)
+    conn, addr = server_socket.accept()
+    with conn:
+        print(f"Connected by {addr}")
+        with open(OUTPUT_FILE, "wb") as f:
+            while True:
+                data = conn.recv(BUFFER_SIZE)
+                if not data:
+                    break
+                f.write(data)
+        print(f"File saved as {OUTPUT_FILE}")
 
-time.sleep(0.1)  # Give system time to flush I/O
-
-try:
-    img = Image.open("received_image.png")
-    img.show()
-except Exception as e:
-    print(f"Failed to open image: {e}")
+    # Optional: open image to verify
+    time.sleep(0.1)
+    try:
+        img = Image.open(OUTPUT_FILE)
+        img.show()
+    except Exception as e:
+        print(f"Could not open image: {e}")

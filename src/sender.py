@@ -1,22 +1,19 @@
-
 import socket
 
-# Replace with your PC's IP address
-receiver_ip = '192.168.1.100'
-receiver_port = 5005
-buffer_size = 1024
-end_marker = b'__end__'
+SERVER_IP = '192.168.1.205'  # Change to your PC IP address
+SERVER_PORT = 5001
+BUFFER_SIZE = 4096
+FILE_PATH = "pmh2mmc4.png"  # Change to your image file
 
-sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-address = (receiver_ip, receiver_port)
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+    sock.connect((SERVER_IP, SERVER_PORT))
+    print(f"Connected to server {SERVER_IP}:{SERVER_PORT}")
 
-with open("image.png", "rb") as f:
-    while True:
-        chunk = f.read(buffer_size)
-        if not chunk:
-            break
-        sock.sendto(chunk, address)
+    with open(FILE_PATH, "rb") as f:
+        while True:
+            bytes_read = f.read(BUFFER_SIZE)
+            if not bytes_read:
+                break
+            sock.sendall(bytes_read)
 
-# Send end-of-image marker
-sock.sendto(end_marker, address)
-print("Image sent.")
+    print("Image sent successfully.")
