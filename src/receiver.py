@@ -1,28 +1,24 @@
+# receiver.py (on PC)
 import socket
 import time
-# msgFromClient = "Hello Server from Client"
-# bytesToSend = msgFromClient.encode('utf-8')
-serverAddress = ('192.168.1.204', 2222) #RPI address
+from PIL import Image
+
 bufferSize = 1024
-UDPClient = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+serverPort = 2222
+serverIP = "0.0.0.0"  # Listen on all interfaces
+
+RPIsocket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+RPIsocket.bind((serverIP, serverPort))
+
+print("Receiver listening on port 2222...")
+f = open("received_image.png", "wb")
+
 while True:
-    f = open("pmh2mmc4.png", "rb")
-    data = f.read(bufferSize)
-    while(data):
-        if (UDPClient.sendto(data, serverAddress)):
-            data = f.read(bufferSize)
-    
-    f.close()
-    UDPClient.sendto("end image", serverAddress)
-    time.sleep(0.2)
-    # cmd = input("Send Message: ")
-    # # cmd = input('What do you want to do with counter, INC or DEC? ')
-    # cmd = cmd.encode('utf-8')
-    # UDPClient.sendto(cmd, serverAddress)
-    # data, address = UDPClient.recvfrom(bufferSize)
-    # data = data.decode('utf-8')
-    # print(f"Port {address[1]}@{address[0]} says: {data}")
-    # if "bye" in data.lower():
-    #     print("Server says bye, closing client")
-    #     UDPClient.close()
-    #     break
+    data, addr = RPIsocket.recvfrom(bufferSize)
+    if data.decode(errors="ignore") == "end image":
+        print("End of image transmission received.")
+        break
+    f.write(data)
+
+f.close()
+Image.open("received_image.png").show()
