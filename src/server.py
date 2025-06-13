@@ -8,7 +8,7 @@ received_chunks = {}
 print("Waiting for image data...")
 
 while True:
-    data, addr = server.recvfrom(4096)
+    data, addr = server.recvfrom(65000)
     seq = int.from_bytes(data[:4], byteorder='big', signed=True)
 
     if seq == -1:

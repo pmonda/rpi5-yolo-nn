@@ -6,7 +6,7 @@ server_address = ('192.168.1.205', 1003)  # Replace with PC's IP
 with open("pmh2mmc4.png", "rb") as file:
     seq = 0
     while True:
-        chunk = file.read(4096 - 4)  # 4 bytes for sequence number
+        chunk = file.read(65000 - 4)  # 4 bytes for sequence number
         if not chunk:
             break
         # Prepend sequence number (4 bytes, big-endian)
