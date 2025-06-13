@@ -5,7 +5,7 @@ server_address = ('192.168.1.205', 1003)
 
 with open("pmh2mmc4.png", "rb") as file:
     while True:
-        chunk = file.read(4096)
+        chunk = file.read(65000)
         if not chunk:
             break
         client.sendto(chunk, server_address)
