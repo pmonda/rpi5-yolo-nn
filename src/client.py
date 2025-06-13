@@ -1,21 +1,25 @@
 import socket
+import pickle
 
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server_address = ('192.168.1.205', 1003)  # Replace with your PC's IP
+server_address = ('192.168.1.50', 1003)  # Replace with PC's IP
 
-with open("pmh2mmc4.png", "rb") as file:
+with open("pmh2mmc4.png", "rb") as f:
     seq = 0
     while True:
-        chunk = file.read(4090)  # 4090 bytes of image + 6 bytes of header
+        chunk = f.read(3000)  # Leave room for pickle overhead to stay < 4096
         if not chunk:
             break
-        # Add 6-byte header: 2 bytes marker + 4 bytes sequence number
-        header = b'PK' + seq.to_bytes(4, 'big')  # 'PK' is a fixed marker
-        packet = header + chunk
-        client.sendto(packet, server_address)
+        packet = {
+            'seq': seq,
+            'data': chunk
+        }
+        serialized = pickle.dumps(packet)
+        client.sendto(serialized, server_address)
         seq += 1
 
-# Send final DONE packet
-client.sendto(b'DONE', server_address)
+# Send DONE signal
+done_packet = pickle.dumps({'done': True, 'total_chunks': seq})
+client.sendto(done_packet, server_address)
 client.close()
 print("Image sent.")

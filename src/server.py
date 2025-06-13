@@ -1,25 +1,32 @@
 import socket
+import pickle
 
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server.bind(('0.0.0.0', 1003))  # Listen on all interfaces
+server.bind(('0.0.0.0', 1003))
 
-print("Waiting for image data...")
+print("Listening for image chunks...")
 received = {}
 
 while True:
     data, addr = server.recvfrom(4096)
-    if data == b'DONE':
+    try:
+        packet = pickle.loads(data)
+    except Exception as e:
+        print("Deserialization error:", e)
+        continue
+
+    if 'done' in packet:
+        print(f"Done receiving. Total chunks: {packet['total_chunks']}")
         break
 
-    if data[:2] == b'PK':  # Our packet marker
-        seq = int.from_bytes(data[2:6], 'big')
-        chunk = data[6:]
-        received[seq] = chunk
+    seq = packet['seq']
+    chunk = packet['data']
+    received[seq] = chunk
 
-# Reassemble in correct order
-with open("output.jpg", "wb") as file:
+# Write image
+with open("output.jpg", "wb") as f:
     for i in sorted(received.keys()):
-        file.write(received[i])
+        f.write(received[i])
 
 server.close()
-print("Image received.")
+print("Image reassembled and saved.")
