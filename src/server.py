@@ -1,26 +1,22 @@
+# receiver.py
 import socket
+import pickle
 
-server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-server.bind(('0.0.0.0', 1003))
+UDP_IP = "0.0.0.0"
+UDP_PORT = 5005
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.bind((UDP_IP, UDP_PORT))
 
-received_chunks = {}
+# Receive metadata
+data, addr = sock.recvfrom(1024)
+total_packets = int(data.decode())
 
-print("Waiting for image data...")
+# Receive all chunks
+received_data = bytearray()
+for _ in range(total_packets):
+    packet, _ = sock.recvfrom(4096)
+    received_data.extend(packet)
 
-while True:
-    data, addr = server.recvfrom(65000)
-    seq = int.from_bytes(data[:4], byteorder='big', signed=True)
-
-    if seq == -1:
-        print("EOF received.")
-        break
-
-    received_chunks[seq] = data[4:]  # Strip the sequence header
-
-# Write all chunks in order to a file
-with open("output.jpg", "wb") as f:
-    for i in sorted(received_chunks.keys()):
-        f.write(received_chunks[i])
-
-server.close()
-print("Image reassembled and saved.")
+# Deserialize
+tensor = pickle.loads(received_data)
+print(tensor.shape)
