@@ -4,6 +4,9 @@ import pickle
 import signal
 import sys
 import time
+from tiny_yolo import *
+from client import model, split_idx, img, sized
+from utils import *
 
 UDP_IP = "0.0.0.0"
 UDP_PORT = 5005
@@ -15,10 +18,25 @@ def signal_handler(sig, frame):
     sock.close()
     sys.exit(0)
 
+def split_model(model, split_idx):
+    # Use model.cnn instead of model.module_list
+    part2 = nn.Sequential(*list(model.cnn.children())[split_idx:])
+    return part2
+
+def get_part2(intermediate_tensor, part2):
+    with torch.no_grad():
+        feature_out = part2(intermediate_tensor)
+        return feature_out
+
 # Set up signal handler for graceful shutdown
 signal.signal(signal.SIGINT, signal_handler)
 
 try:
+    device = "cpu"  # Force CPU usage
+    print(f"Using device: {device}")
+    model = model.to(device)  # Move entire model to CPU
+    model.eval()  # Ensure model is in evaluation mode
+    
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     sock.bind((UDP_IP, UDP_PORT))
     sock.settimeout(TIMEOUT)
@@ -67,13 +85,25 @@ try:
             print(f"Tensor shape: {tensor.shape}")
             print(f"Tensor device: {tensor.device}")
             print(f"Tensor type: {tensor.dtype}")
-            print(tensor)
-
+            
+            # Process on CPU
+            part2 = split_model(model, split_idx)
+            part2 = part2.cpu()
+            final_tensor = get_part2(tensor, part2)
+            
+            # Object detection on CPU
+            class_names = load_class_names('voc.names')
+            boxes = do_detect(model, sized, 0.5, 0.5, use_cuda=False)
+            plot_boxes(img, boxes, 'predict1.jpg', class_names)
+            
+            print("Processing complete")
+            # Send the final tensor back to client if needed
+            # ... add code here for sending results back ...
         except socket.timeout:
             print("Timeout waiting for initial data")
             continue
         except Exception as e:
-            print(f"Error processing data: {e}")
+            print(f"Error processing data: {e, type(e)}")
             continue
 
 except Exception as e:
