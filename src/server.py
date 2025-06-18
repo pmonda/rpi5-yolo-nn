@@ -90,11 +90,28 @@ try:
             part2 = split_model(model, split_idx)
             part2 = part2.cpu()
             final_tensor = get_part2(tensor, part2)
-            
-            # Object detection on CPU
-            class_names = load_class_names('voc.names')
-            boxes = do_detect(model, sized, 0.5, 0.5, use_cuda=False)
-            plot_boxes(img, boxes, 'predict1.jpg', class_names)
+           
+            with torch.no_grad():
+                output = part2(tensor)
+                
+                # Reshape output to get class probabilities
+                # YOLO output shape is [batch, anchors * (5 + num_classes), grid_h, grid_w]
+                batch_size, _, grid_h, grid_w = output.shape
+                num_classes = 20  # VOC dataset has 20 classes
+                
+                # Get class probabilities across all grid cells
+                class_probs = output.view(batch_size, 5, 5 + num_classes, grid_h, grid_w)[:, :, 5:, :, :]
+                # Average probabilities across anchors and grid cells
+                class_probs = class_probs.mean(dim=[1, 3, 4])
+                
+                # Get top prediction
+                confidence, class_idx = torch.max(class_probs[0], dim=0)
+                
+                # Load class names and print prediction
+                class_names = load_class_names('voc.names')
+                print("\nClassification Result:")
+                print(f"Class: {class_names[class_idx]}")
+                print(f"Confidence: {confidence:.2f}")
             
             print("Processing complete")
             # Send the final tensor back to client if needed
